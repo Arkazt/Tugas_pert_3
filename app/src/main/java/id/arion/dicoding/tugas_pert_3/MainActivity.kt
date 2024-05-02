@@ -19,8 +19,6 @@ class MainActivity : AppCompatActivity() {
     val pilihan = arrayOf("Pilih Umur", "Kurang dari 17 Tahun", "Lebih dari 17 Tahun")
     var posisi = 0
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -58,14 +56,17 @@ class MainActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
-            }}
+            }
+        }
 
-        btnHitung.setOnClickListener(View.OnClickListener {
+        //listener
+        btnHitung.setOnClickListener {
             val bil1 = edtBil1.text.toString().toDouble()
             val bil2 = edtBil2.text.toString().toDouble()
 
+            //perhitungan
             val ubahBil2 = bil2 / 100
-            val hasil = bil1 / (ubahBil2*ubahBil2)
+            val hasil = bil1.toFloat() / (ubahBil2.toFloat() * ubahBil2.toFloat())
 
             txtHasil.text = hasil.toString()
 
@@ -73,43 +74,65 @@ class MainActivity : AppCompatActivity() {
                 0 -> {
                     txtHasil.text = "Pilih Umur"
                 }
+
                 1 -> {
-                    BMIAnak(bmi)
+                    BMIAnak(hasil)
                 }
+
                 2 -> {
-                    BMIDewasa(bmi)
+                    BMIDewasa(hasil)
                 }
-        }
-        })
-
-        fun resultBMIAnak(bmi: Float) {
-
             }
         }
 
     }
 
-    private fun BMIAnak(bmi: Float) {
-        txtHasil.text = bmi.toString()
+    fun BMIAnak(hasil: Float) {
+        val txtHasil = findViewById<TextView>(R.id.status)
+        txtHasil.text = hasil.toString()
         when {
-            bmi < 5 -> {
-                txtHasil.text = "Underweight"
+            hasil < 5 -> {
+                txtHasil.text = "Kurang Gizi"
             }
 
-            bmi in 5.0..84.9 -> {
+            hasil in 5.0..84.9 -> {
                 txtHasil.text = "Normal"
             }
 
-            bmi in 85.0 .. 95.0 -> {
-                txtHasil.text = "Overweight"
+            hasil in 85.0..95.0 -> {
+                txtHasil.text = "Kelebihan Gizi"
             }
 
-            bmi > 95 -> {
-                txtHasil.text = "Obese"
+            hasil > 95 -> {
+                txtHasil.text = "Obesitas"
             }
         }
 
     }
 
+    fun BMIDewasa(hasil: Float) {
+        val txtHasil = findViewById<TextView>(R.id.status)
+        txtHasil.text = hasil.toString()
+        when {
+            hasil < 18.5 -> {
+                txtHasil.text = "Kurang Gizi"
+            }
+
+            hasil in 18.5..24.9 -> {
+                txtHasil.text = "Normal"
+            }
+
+            hasil in 25.0..30.0 -> {
+                txtHasil.text = "Kelebihan Gizi"
+            }
+
+            hasil > 30 -> {
+                txtHasil.text = "Obesitas"
+            }
+        }
+    }
 }
+
+
+
 
