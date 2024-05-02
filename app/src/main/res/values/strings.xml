@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tugas_pert_3</string>
+    <string-array name="Umur">
+        <item>Pilih Umur</item>
+        <item>Kurang dari 17 Tahun</item>
+        <item>Lebih dari 17 Tahun</item>
+    </string-array>
+</resources>
